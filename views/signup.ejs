@@ -1,0 +1,36 @@
+<%- include header.ejs %>
+
+       <form action="/signup" method="POST">
+           <div class="container">
+                <label><b>Username : </b></label>
+                <input type="text" placeholder="Enter Username" name="userName" id="userName" required>
+
+                <br /><br />
+
+                <label><b>Password : </b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+                <br /><br />
+
+                <label><b>Confirm Password : </b></label>
+                <input type="password" placeholder="Confirm Password" name="cnfPassword" id="cnfPassword" required>
+
+                <br /><br />
+
+                <label><b>Email : </b></label>
+                <input type="email" placeholder="Enter Password" name="email" id="email" required>
+
+                <br /><br />
+
+                <button type="submit">Register</button>  <a href="/" > back to login</a> <br />
+
+                <% if( typeof errorMessage != 'undefined') { %>
+                    <div class="alert alert-danger">
+                        <%= errorMessage %>
+                    </div>
+                <% } %>
+                
+            </div>
+        </form>
+
+<%- include footer.ejs %>
