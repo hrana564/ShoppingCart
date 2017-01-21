@@ -14,7 +14,13 @@ router.post('/', function(request, response) {
             response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : "<strong>Internal Server error!</strong> Please try again later."})
         } else {
             if(resource){
-                response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,successMessage : "Logged in successfully!."})
+                request.session.user = resource;
+                if(request.session.user.roleID == 1){
+                    response.redirect('/admin/dashboard');
+                }else if (request.session.user.roleID == 2){
+                    response.redirect('/customer/main');
+                }else
+                response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : "Invalid user! Please contact system admin."});
             }else{
                 response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : "<strong>Invalid Credentials!</strong> Please try again."})
             }

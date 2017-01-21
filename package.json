@@ -12,8 +12,11 @@
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.2",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "mongoose": "^4.7.5",
     "morgan": "^1.7.0",
     "node-inspect": "^1.10.5",

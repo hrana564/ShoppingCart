@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var UserSchema = new Schema({
-    productID: {type: Number, required:true, unique : true},
+    // productID: {type: Number, required:true, unique : true},
     productName:{type: String,
         required: [true,'Product Name is Mandatory.'],
         unique : true
@@ -13,10 +13,10 @@ var UserSchema = new Schema({
         type : Boolean,
         required : [true,'Product Availability is Mandatory.']
     },
-    lastUpdatedOn : {type: Date, default: Date.now()}
+    lastUpdatedOn : {type: Date, default: Date.now()},
     lastUpdatedBy: {type : String,required:[true,'Product updated by is Mandatory.']},
 });
 
-var UserModel = mongoose.model('Users', UserSchema);
+var UserModel = mongoose.model('Products', UserSchema);
 
 module.exports = UserModel;
