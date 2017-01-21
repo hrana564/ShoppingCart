@@ -6,19 +6,6 @@ var config = require('../../utilities/config');
 var commonFunctions = require('../../utilities/functions.js');
 var ProductModel = require('../../models/products');
 
-
-router.get('/',function(request,response){
-    if(commonFunctions.IsAdminLoggedIn(request,response)){
-        ProductModel.find({},function (err,resource) {
-           if(err){
-               response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,customMessageClass:"alert-danger",customMessage:"Internal server error occoured! Please try again later."});
-           } else{
-               response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,productList : resource});
-           }
-        });
-    }
-});
-
 router.get('/:alertClass/:alertMessage',function(request,response){
     if(commonFunctions.IsAdminLoggedIn(request,response)){
         ProductModel.find({},function (err,resource) {
@@ -27,6 +14,18 @@ router.get('/:alertClass/:alertMessage',function(request,response){
                 response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,customMessageClass:"alert-danger",customMessage:"Internal server error occoured! Please try again later."});
             } else{
                 response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,productList : resource,customMessageClass : request.params.alertClass,customMessage: request.params.alertMessage});
+            }
+        });
+    }
+});
+
+router.get('/',function(request,response){
+    if(commonFunctions.IsAdminLoggedIn(request,response)){
+        ProductModel.find({},function (err,resource) {
+            if(err){
+                response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,customMessageClass:"alert-danger",customMessage:"Internal server error occoured! Please try again later."});
+            } else{
+                response.render('admin/dashboard',{AppName:config.AppName,footerSignature:config.footerSignature,productList : resource});
             }
         });
     }

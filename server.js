@@ -2,6 +2,7 @@ var PORT = 8000 || process.env.PORT;
 var config = require('./utilities/config.js');
 var loginRouter=require('./routes/login');
 var signupRouter=require('./routes/signup');
+var logoutRouter = require('./routes/logout');
 var resetPasswordRouter = require('./routes/resetpassword');
 var forgotPasswordRouter = require('./routes/forgotpassword');
 
@@ -33,6 +34,7 @@ app.use('/login',loginRouter);
 app.use('/signup',signupRouter);
 app.use('/forgotPassword',forgotPasswordRouter);
 app.use('/resetPassword',resetPasswordRouter);
+app.use('/logout',logoutRouter);
 app.use('/admin/dashboard',adminDashboard);
 app.use('/customer/main',customerMain);
 

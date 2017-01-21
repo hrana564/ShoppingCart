@@ -1,5 +1,11 @@
 <%- include ../header.ejs %>
 
+<div style="width: 10%;float:right;">
+    <form action="/logout" method="post">
+        <button>Logout</button>
+    </form>
+</div>
+
 <h1>Hello Normal User!!!</h1>
 
 <%if (typeof customMessageClass != 'undefined' && typeof customMessage != 'undefined') { %>
@@ -8,11 +14,35 @@
 </div>
 <% } %>
 
-<div class="container">
 
-</div>
-<div style="border:1px solid black">
+<% if(typeof productList !='undefined') { %>
+    <div class="container">
+        <% for(var i=0; i<productList.length; i++) {%>
+            <%if(i%3==0){%>
+                <%if(i!=0){%>
+                    </div><br /><br />
+                <%}%>
+                <div class="row">
+            <%}%>
+            <div class="col-md-3" >
+                <h2><%= productList[i].productName %></h2>
+                <h2>Cost : <%= productList[i].productCost %></h2>
+                <% if (productList[i].IsAvaliable){%>
+                    <button >Add To Cart</button>
+                <%} else {%>
+                    <h2 style="color:red">Out of Stock</h2>
+                <%}%>
+            </div>
+        <% } %>
+        </div>
+    </div>
+<%}  else {%>
+    <div class="container">
+        <div class="alert alert-danger">
+            <strong>Sorry !!! </strong> There are no products to display.
+        </div>
+    </div>
+<%}%>
 
-</div>
-
+<br />
 <%- include ../footer.ejs %>
