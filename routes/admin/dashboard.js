@@ -43,6 +43,7 @@ router.post('/', function(request, response) {
                         console.log(err);
                         response.redirect('/admin/dashboard/alert-danger/Error occoured while editing product');
                     }else{
+                        commonFunctions.RefreshProducts(request,response);
                         response.redirect('/admin/dashboard/alert-success/Product was edited successfuully.');
                     }
                 });
@@ -56,6 +57,7 @@ router.post('/', function(request, response) {
                     response.redirect('/admin/dashboard/alert-danger/Error occoured while deleting product');
                 }
                 else {
+                    commonFunctions.RefreshProducts(request,response);
                     response.redirect('/admin/dashboard/alert-success/Product was deleted successfuully.');
                 }
             });
