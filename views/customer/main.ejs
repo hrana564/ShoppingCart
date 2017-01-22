@@ -1,13 +1,24 @@
 <%- include ../header.ejs %>
+<div class="container">
 
-<div style="width: 10%;float:right;">
-    <form action="/logout" method="post">
-        <button>Logout</button>
-    </form>
+    <div style="width: 10%;float:right;">
+        <form action="/logout" method="post">
+            <button>Logout</button>
+        </form>
+    </div>
+
+    <%if(typeof cartCount != 'undefined'){%>
+    <div style="width: 130px;float:right;">
+        <a href="/customer/cart">
+            <span style="font-size: 30px !important;position: relative;left: 10px"><%= cartCount%></span>
+            <img src="/images/customer/shopping-cart.jpg" style="width: 100;height: 100;">
+        </a>
+    </div>
+    <%}%>
+
+    <h1>Hello Normal User!!!</h1>
+
 </div>
-
-<h1>Hello Normal User!!!</h1>
-
 <%if (typeof customMessageClass != 'undefined' && typeof customMessage != 'undefined') { %>
 <div class="alert <%= customMessageClass %>">
     <%- customMessage %>
@@ -28,7 +39,14 @@
                 <h2><%= productList[i].productName %></h2>
                 <h2>Cost : <%= productList[i].productCost %></h2>
                 <% if (productList[i].IsAvaliable){%>
-                    <button >Add To Cart</button>
+                    <% if(cartProducts.indexOf(productList[i].id) > -1) {%>
+                        <h2 style="color:green">Added to Cart</h2>
+                    <%} else {%>
+                        <form action="/customer/main" method="post">
+                            <input type="hidden" name="productIDATC" id="<%= productList[i]._id %>" value="<%= productList[i]._id %>">
+                            <input type="submit" value="+ Add To Cart">
+                        </form>
+                    <%}%>
                 <%} else {%>
                     <h2 style="color:red">Out of Stock</h2>
                 <%}%>

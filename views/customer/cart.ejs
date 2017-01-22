@@ -1,0 +1,59 @@
+<%- include ../header.ejs %>
+
+<div style="width: 10%;float:right;">
+    <form action="/logout" method="post">
+        <button>Logout</button>
+    </form>
+</div>
+
+<h1>This is your personalized cart!!!</h1>
+
+<%if (typeof customMessageClass != 'undefined' && typeof customMessage != 'undefined') { %>
+<div class="alert <%= customMessageClass %>">
+    <%- customMessage %>
+</div>
+<% } %>
+
+
+<% var productSRNum = 1; if(typeof productList !='undefined') {%>
+<table id="cartTable" border="1" >
+    <thead>
+        <th>
+            Sr Num
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Product Cost
+        </th>
+        <th>
+            Remove
+        </th>
+    </thead>
+    <% productList.forEach(function(product) { %>
+    <% if(cartProducts.indexOf(product.id) > -1) {%>
+        <tr>
+            <td><%= productSRNum++; %></td>
+            <td><%= product.productName %></td>
+            <td><%= product.productCost %></td>
+            <td>
+                <form action="/customer/cart" method="post">
+                    <input type="hidden" name="productIDRFC" value="'<%= product._id %>'">
+                    <input type="submit" value="Remove" onclick="return confirm('Are you sure to remove this product?');">
+                </form>
+            </td>
+        </tr>
+    <%}%>
+
+    <% }); %>
+</table>
+<%} %>
+
+<br />
+<script>
+    $(document).ready(function(){
+        $('#cartTable').DataTable();
+    });
+</script>
+<%- include ../footer.ejs %>

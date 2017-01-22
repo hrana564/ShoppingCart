@@ -1,6 +1,3 @@
-/**
- * Created by HP PC on 14-01-2017.
- */
 var config = require('./config');
 module.exports ={
 
@@ -12,6 +9,9 @@ module.exports ={
     },
 
     IsAdminLoggedIn: function (request, response){
+        response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        reresponses.header('Expires', '-1');
+        response.header('Pragma', 'no-cache');
         if(request.session.user && request.session.user.roleID == 1){
             return true;
         }else {
@@ -21,11 +21,24 @@ module.exports ={
     },
 
     IsCustomerLoggedIn: function(request,response){
+        response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        response.header('Expires', '-1');
+        response.header('Pragma', 'no-cache');
         if(request.session.user && request.session.user.roleID == 2){
             return true;
         }else {
             response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : "Session expired! Please re-login to continue."});
             return false;
+        }
+    },
+    SessionExpired:function (request,response,errorString) {
+        response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        response.header('Expires', '-1');
+        response.header('Pragma', 'no-cache');
+        if(errorString){
+            response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : errorString});
+        }else{
+            response.render('login.ejs',{AppName:config.AppName,footerSignature:config.footerSignature,errorMessage : "Session expired! Please re-login to continue."});
         }
     }
 };

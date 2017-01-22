@@ -13,9 +13,9 @@ var UserSchema = new Schema({
         required : [true,'Email Address is Mandatory.'],
         unique : true
     },
-    //userID: {type: Number, required:true,unique : true},
     roleID : {type: Number, required:true, default:2},
     resetKey: {type : String,default : ''},
+    cartProducts : {type :[String], default : []},
     lastUpdatedOn : {type: Date, default: Date.now()}
 });
 

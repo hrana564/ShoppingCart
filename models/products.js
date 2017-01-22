@@ -14,7 +14,7 @@ var UserSchema = new Schema({
         required : [true,'Product Availability is Mandatory.']
     },
     lastUpdatedOn : {type: Date, default: Date.now()},
-    lastUpdatedBy: {type : String,required:[true,'Product updated by is Mandatory.']},
+    lastUpdatedBy: {type : String,required:[true,'Product updated by is Mandatory.']}
 });
 
 var UserModel = mongoose.model('Products', UserSchema);

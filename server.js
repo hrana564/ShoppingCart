@@ -11,7 +11,7 @@ var adminDashboard = require('./routes/admin/dashboard');
 
 
 var customerMain = require('./routes/customer/main');
-
+var cartRouter = require('./routes/customer/cart')
 
 var DB = config.database;
 var mongoose = require('mongoose');
@@ -37,6 +37,7 @@ app.use('/resetPassword',resetPasswordRouter);
 app.use('/logout',logoutRouter);
 app.use('/admin/dashboard',adminDashboard);
 app.use('/customer/main',customerMain);
+app.use('/customer/cart',cartRouter);
 
 // app.use('/home',homeRouter);
 mongoose.connect(config.database, function (err) {
