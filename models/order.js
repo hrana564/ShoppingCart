@@ -12,6 +12,10 @@ var OrderSchema = new Schema({
     cartCost: {type :Number,
         required: [true,'Cart Cost is Mandatory.']
     },
+    Address : {
+        type : String,
+        required: [true,'Order Address is Mandatory.']
+    },
     orderStatus:{
         type : String,
         default : "Placed"

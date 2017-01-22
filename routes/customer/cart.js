@@ -8,6 +8,9 @@ var ProductModel = require('../../models/products');
 
 router.get('/:alertClass/:alertMessage',function(request,response){
     if(commonFunctions.IsCustomerLoggedIn(request,response)){
+        if(commonFunctions.RefreshProducts(request,response)){
+
+        };
         ProductModel.find({},function (err,resource) {
             if(err){
                 console.error(err);
@@ -21,6 +24,9 @@ router.get('/:alertClass/:alertMessage',function(request,response){
 
 router.get('/',function(request,response){
     if(commonFunctions.IsCustomerLoggedIn(request,response)){
+        if(commonFunctions.RefreshProducts(request,response)){
+
+        };
         ProductModel.find({},function (err,resource) {
             if(err){
                 response.redirect('/customer/cart/alert-danger/Internal server error occoured! Please try again later.');
